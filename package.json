@@ -1,7 +1,7 @@
 {
   "name": "sqs-push",
   "version": "0.0.1",
-  "description": "A simple highe level library used to push messages to an Amazon SQS queue.",
+  "description": "A simple high level library used to push messages to an Amazon SQS queue.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
