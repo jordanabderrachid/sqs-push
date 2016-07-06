@@ -63,7 +63,7 @@ SQS.prototype._pushMessage = function (queueURL, messageBody, cb) {
   }
 
   var params = {
-    'messageBody': messageBody,
+    'MessageBody': messageBody,
     'QueueUrl': queueURL,
     'DelaySeconds': 0
   }
