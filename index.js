@@ -5,12 +5,13 @@ var debug = require('debug')('sqs-push')
 var LRU = require('lru')
 
 var SQS = function (sqsClient, options) {
-  if (!this instanceof SQS) {
+  if (!(this instanceof SQS)) {
     return new SQS(sqsClient, options)
   }
 
   this._sqsClient = sqsClient
 
+  options = options || {}
   this._cacheSize = options.cacheSize || 10
   this._cacheMaxAge = options.cacheMaxAge || 1 * 60 * 1000 // 1 min.
 
@@ -87,16 +88,28 @@ SQS.prototype.push = function (queueName, messageBody, cb) {
   // 2. Push message to queue.
   var fnsWaterfall = [
     function retrieveQueueURL (_cb) {
-      self._getQueueURL(queueName, _cb)
+      async.retry({
+        times: 3,
+        interval: 200
+      },
+      self._getQueueURL.bind(self, queueName),
+      _cb)
     },
     function pushMessage (queueURL, _cb) {
-      self._pushMessage(queueURL, messageBody, function (err) {
-        if (err) {
-          self._queueURLCache.remove(queueName) // Remove url from cache
-        }
+      async.retry({
+        times: 3,
+        interval: 200
+      },
+      function (_cb) {
+        self._pushMessage(queueURL, messageBody, function (err) {
+          if (err) {
+            self._queueURLCache.remove(queueName) // Remove url from cache
+          }
 
-        _cb(err)
-      })
+          _cb(err)
+        })
+      },
+      _cb)
     }
   ]
 
