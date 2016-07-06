@@ -1,6 +1,6 @@
 {
   "name": "sqs-push",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A simple high level library used to push messages to an Amazon SQS queue.",
   "main": "index.js",
   "scripts": {

@@ -1,5 +1,8 @@
-#### 0.0.2 - 2015-07-06
-  - *Add* a retry mechanism.
+#### 0.0.3
+  - **Fix** parameter name.
 
-#### 0.0.1 - 2015-07-05
+#### 0.0.2
+  - **Add** a retry mechanism.
+
+#### 0.0.1
   - Initial release.
