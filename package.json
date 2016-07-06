@@ -4,7 +4,7 @@
   "description": "A simple high level library used to push messages to an Amazon SQS queue.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./node_modules/.bin/mocha ./test/**/*.js",
     "pretest": "./node_modules/.bin/standard"
   },
   "keywords": [
@@ -24,6 +24,8 @@
     "url": "https://github.com/jordanabderrachid/sqs-push.git"
   },
   "devDependencies": {
+    "mocha": "2.5.3",
+    "should": "9.0.2",
     "standard": "7.1.2"
   }
 }
